@@ -82,8 +82,9 @@ nav a:active {
     transform: scale(1);
 }
 
-.thisPage {
+.thisPage { /* makes it more obvious that you can't go to the page you're already on */
     transform: scale(1.05);
+    cursor: default;
 }
 
 #appname-element {

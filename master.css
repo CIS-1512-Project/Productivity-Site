@@ -1,0 +1,123 @@
+/* Do whatever you want if you wanna make it more readable, sorry for not knowing how to make CSS 
+   sheets easy to read :( - Azavier */
+
+* {
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+:root { /* Using the :root element will allow us to change the theme of the website easier later. Also very convenient. */
+    --name-col: #4285f4;
+    --namebubble-col: var(--name-col);
+
+    --bgcol: #011627;
+
+    --bubble-bgcol: #252946;
+    --text-col: #dee2ef;
+    --nav-hvrcol: #c3c7d4;
+
+    --nav-width: 7.2em;
+} /* See index.html if you're confused about how to use :root */
+
+body {
+    background-color: var(--bgcol);
+}
+
+nav {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: var(--nav-width);
+}
+
+nav div {
+    transition: all 0.4s ease-out;
+
+    height: 100%;
+    width: var(--nav-width);
+    padding: 0.2em;
+
+    display: flex;
+    flex-direction: column;
+    
+    background-color: var(--bubble-bgcol);
+}
+
+nav a {
+    cursor: pointer;
+    user-select: none;
+
+    color: var(--text-col);
+    text-decoration: none;
+
+    width: 100%;
+    margin: 0 0 1rem;
+    text-align: center;
+
+    height: 2.5em;
+    display: inline-grid;
+    align-content: center;
+
+    transition: transform 0.1s ease-in-out;
+}
+
+nav a:hover,
+nav a:focus {
+    color: var(--nav-hvrcol);
+    transform: scale(1.05);
+}
+
+nav a:active {
+    transform: scale(1);
+}
+
+.thisPage {
+    transform: scale(1.05);
+}
+
+#appname-element {
+    color: var(--name-col);
+    font-size: x-large;
+
+    margin: 1rem 0 4.5rem;
+    height: 1.25em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#appname-element::before { /* this is the bubble before the app name in the navbar */
+    content: '';
+
+    border-radius: 50%;
+    background-color: var(--namebubble-col);
+    
+    display: inline-block;
+    height: 65%;
+    aspect-ratio: 1;
+
+    margin-right: 0.225em;
+}
+
+@media screen and (max-width: 743px) { /* kicks in when the navbar needs to be hidden */
+    nav {
+        width: calc(var(--nav-width) * 0.4);
+    }
+
+    nav div {
+        position: absolute;
+        transform: translateX(calc(5px - var(--nav-width)));
+    }
+
+    nav:hover div,
+    nav:focus-within div {
+        transform: translateX(0);
+    }
+}

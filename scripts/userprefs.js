@@ -5,18 +5,21 @@
 // this will make it easy to load/update user style preferences. 
 // All CSS variables that hold user editable data in master :root should be named here.
 const MASTER_PREFS = [ 
+    "background-col",
+    "foreground-col",
+
     "name-col",
-    "bgcol",
-    "bubble-bgcol",
     "text-col",
-    "nav-hvrcol",
+    "text-selected-col",
+    
     "nav-width",
-    "collapse-width"
+    "nav-collapsed-width",
+    "collapsed-mouseover-width-percentage"
 ];
 // All CSS variables that hold user editable data in a specific pages' :root should be named here.
 // 0 = Dashboard  1 = Timers  2 = To-Do  3 = Calendar
 const PER_PAGE_PREFS = [
-    ["namebubble-col", 0]
+    ["name-bubble-col", 0]
 ];
 
 const QueryAllPrefData = () => {
@@ -66,6 +69,10 @@ function LoadStylePrefs() {
     UserPrefs.id = "userprefs";
 
     const prefs = QueryAllPrefData();
+
+    if(prefs.length == 0) {
+        return;
+    }
     
     const PAGEIND = document.querySelector("meta[name='page_index']").content;
     // Build a new root element ruleset

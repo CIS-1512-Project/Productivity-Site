@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="page_index" content="0">
+    <meta name="page_index" content="1">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -9,8 +9,11 @@
     
     <link rel="stylesheet" href="master.css">
     <style>
+        /* Overriding the color of the bubble in this manner is exactly what our handler does. */
+        /* This is how you would define a default variable value for a specific page */
+        /* On the other hand, default variables for ALL pages go in the master.css :root element */
         :root {
-            --name-bubble-col: #d0ff41ff; /* Overrite the color of the bubble next to the app name since we're on that page */
+            --name-bubble-col: #d0ff41ff;
         } 
     </style>
 </head>

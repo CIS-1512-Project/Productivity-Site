@@ -28,9 +28,9 @@
     
     --nav-width: 7.5rem;
     --nav-collapsed-width: 10%;
-    --collapsed-mouseover-width-percentage: 40; /* 40% collapsed */
+    --collapsed-mouseover-percentage: 40; /* 40% collapsed */
     
-    --collapsed-mouseover-width: calc(var(--nav-width) * (1 - 0.01 * clamp(-100, var(--collapsed-mouseover-width-percentage), 100))); 
+    --collapsed-mouseover-width: calc(var(--nav-width) * (1 - 0.01 * clamp(-100, var(--collapsed-mouseover-percentage), 100))); 
    /* collasped-mouseover-width is an example of an "invisible" variable with */
    /* user-editable data used for calculation. */
    /* it is "invisible" because it is not a member of any UPO in `userprefs.js` */

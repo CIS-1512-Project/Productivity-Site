@@ -9,6 +9,7 @@
     <title>Timers</title>
     
     <link rel="stylesheet" href="master.css">
+    <link rel = "stylesheet" href = "stylesheets/timers.css">
 </head>
 
 <script src="scripts/UserThemePrefs.js"></script>
@@ -24,9 +25,11 @@
     <!--CONTENT BEGIN-->
     <main>
         <div>
-            <button onclick = countdown()>Start timer</button>
-            <!-- <h1 id = "minutes"><h1>:</h1><h1 id = "seconds"> -->
-            <h1 id = "time"></h1>
+            <button id = "btn_startTimer">START</button>
+            <h1 id = "timer">TIME</h1>
+
+            <button onclick="changeColor('red')">BECOME RED</button>
+            <p id = "the_text">please i want to be red so bad please press the button</p>
             
         </div>
 

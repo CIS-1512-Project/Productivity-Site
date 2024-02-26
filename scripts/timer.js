@@ -1,43 +1,31 @@
-let mins = .25;
-let secs = mins * 60;
-let time = "";
+let seconds = 60;
+let count = seconds;
 
-    function countdown() {
-        setTimeout('Decrement()', 60);
-    }
+let btn_startTimer = document.getElementById("btn_startTimer");
+btn_startTimer.addEventListener(click, changeColor('red'));
 
-    function Decrement() {
-        if (document.getElementById) {
-            minutes = document.getElementById("minutes");
-            seconds = document.getElementById("seconds");
-            if (seconds < 59) {
-                seconds.innerHTML = secs;
-                if (seconds < 10)
-                {
-                    //display 09 instead of 9
-                }
-            }
-            else {
-                time.concat(getminutes(), ":", getseconds())
-                
-            }
-            if (mins < 0) {
-                alert('time up');
-                minutes.value = 0;
-                seconds.value = 0;
-            }
-            else {
-                secs--;
-                setTimeout('Decrement()', 1000);
-            }
-        }
+
+
+text = document.getElementById("timer");
+text.innerHTML = "TESTING";
+text.style.color = "purple";
+
+function startTimer() { setInterval(countdown(), 1000); }
+
+function countdown()
+{
+    count--
+    time_text.innerHTML = count;
+    console.log(count)
+    if(count == 0)
+    {
+        alert("TIMES UP LOL");
     }
- 
-    function getminutes() {
-        mins = Math.floor(secs / 60);
-        return mins;
-    }
- 
-    function getseconds() {
-        return secs - Math.round(mins * 60);
-    }
+}
+
+function changeColor(newColor)
+{
+    the_text = document.getElementById("the_text");
+    the_text.innerHTML = "YAY I AM SO ELATED RN"
+    the_text.style.color = newColor;
+}

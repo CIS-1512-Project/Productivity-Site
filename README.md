@@ -22,7 +22,7 @@ We have created a custom handler object to manage user theme preferences.
 The reason for needing a custom class is primarily for ease of use and speed benefits.
 
 The way it works is via the CSS `:root` element selector.
-We define variables in the root element on higher cascading levels, which are overridden by user preferences if they exist.
+We define variables in the root element on higher cascading levels, which are overridden by user preferences if they exist. Note that you don't have to define CSS variables first if you don't want to because putting a variable name into a UPO gives it the ability to create a variable with that name.
 Directly overriding CSS variables allows fine-tuned control over the styling of the web page.
 
 When developing the handler we wanted to focus on being able to easily manage and create groups of player preferences, even if you want to group properties which will affect different pages.

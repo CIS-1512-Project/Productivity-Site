@@ -7,10 +7,9 @@ btn_startTimer.addEventListener(click, changeColor('red'));
 
 
 text = document.getElementById("timer");
-text.innerHTML = "TESTING";
-text.style.color = "purple";
 
-function startTimer() { setInterval(countdown(), 1000); }
+
+function startTimer() { setInterval(countdown, 1000); }
 
 function countdown()
 {

@@ -1,0 +1,148 @@
+/* Do whatever you want if you wanna make it more readable, sorry for not knowing how to make CSS 
+   sheets easy to read :( - Azavier */
+
+* {
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    transition: all 0.3s ease-in-out;
+}
+
+:root { /* Using the :root element makes our theme handler possible */
+    --background-col: #011627;
+    --foreground-col: #252946;
+    
+    --name-col: #4285f4;
+    
+    --name-bubble-col: var(--name-col);
+   /* name-bubble-col has this default value for ALL pages. */
+   /* On index.html this value is overridden by default, which creates the highlighted bubble effect */
+    
+    --text-col: #dee2ef;
+    --text-selected-col: #c3c7d4;
+    
+    --nav-width: 7.5rem;
+    --nav-collapsed-width: 10%;
+    --collapsed-mouseover-percentage: 40; /* 40% collapsed */
+    
+    --collapsed-mouseover-width: calc(var(--nav-width) * (1 - 0.01 * clamp(-100, var(--collapsed-mouseover-percentage), 100))); 
+   /* collasped-mouseover-width is an example of an "invisible" variable with */
+   /* user-editable data used for calculation. */
+   /* it is "invisible" because it is not a member of any UPO in `userprefs.js` */
+   /* this makes it impossible for a UPO operator to override */
+   /* all of these fancy words to say "its a normal css variable" */
+
+} /* See `index.html` if you're confused about how to use :root to define default variable values for specific pages */
+
+body {
+    background-color: var(--background-col);
+}
+
+nav {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    width: var(--nav-width);
+}
+
+main {
+    width: calc(100vw - var(--nav-width));
+    height: 100vh;
+
+    position: absolute;
+    right: 0;
+}
+
+nav div {
+    transition: all 0.4s ease-out;
+
+    height: 100%;
+    padding: 0.2em;
+    
+    background-color: var(--foreground-col);
+}
+
+nav a {
+    cursor: pointer;
+    user-select: none;
+
+    color: var(--text-col);
+    text-decoration: none;
+
+    width: 100%;
+    margin: 0 0 1rem;
+    text-align: center;
+
+    height: 2.5em;
+    display: inline-grid;
+    align-content: center;
+
+    transition: all 0.1s ease-in-out;
+}
+
+nav a:hover,
+nav a:focus {
+    color: var(--text-selected-col);
+    transform: scale(1.05);
+}
+
+nav a:active {
+    transform: scale(1);
+}
+
+.thisPage { /* makes it more obvious that you can't go to the page you're already on */
+    transform: scale(1.05);
+    color: var(--text-selected-col);
+    cursor: default;
+}
+
+#appname-element {
+    color: var(--name-col);
+    font-size: x-large;
+
+    margin: 1rem 0 4.5rem;
+    height: 1.25em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#appname-element::before { /* this is the bubble before the app name in the navbar */
+    content: '';
+
+    border-radius: 50%;
+    background-color: var(--name-bubble-col);
+
+    height: 65%;
+    aspect-ratio: 1;
+
+    margin-right: 0.225em;
+}
+
+@media screen and (max-width: 743px) { /* kicks in when the navbar needs to be hidden */
+    nav {
+        z-index: 1;
+        width: var(--collapsed-mouseover-width);
+    }
+
+    nav div {
+        width: var(--nav-width);
+        position: absolute;
+        transform: translateX(calc(var(--nav-collapsed-width) - 100%));
+    }
+
+    nav:hover div,
+    nav:focus-within div {
+        transform: translateX(0);
+    }
+
+    main {
+        width: calc(100vw - var(--collapsed-mouseover-width));
+    }
+}

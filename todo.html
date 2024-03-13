@@ -8,6 +8,27 @@
     <title>To-Do</title>
     
     <link rel="stylesheet" href="master.css">
+    <style>
+        .ToDoHeader
+        {
+            height: 10%;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+        }
+        .ToDoItem
+        {
+            height: 10%;
+            width: 100%;
+            text-align: center;
+        }
+        .subList
+        {
+            height: 30%;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <script src="scripts/UserThemePrefs.js"></script>
@@ -21,9 +42,22 @@
         </div>
     </nav>
     <!--CONTENT BEGIN-->
-    <main>
-
+    <main style="color:#ffffff">
+        <section style="width:70%; height:100%; float: left;">
+            <h1 class="ToDoHeader">
+                Main
+            </h1>
+            <p class="ToDoItem" id="mainTask">
+                Add Task
+            </p>
+        </section>
+        <section style="width:30%; height:100%; float: left;">
+            <h2  class="ToDoHeader" id="list">
+                Create List
+            </h2 >
+        </section>
     </main>
     <!--CONTENT END-->
+    <script src="scripts/ToDo.js"></script>
 </body>
 </html>

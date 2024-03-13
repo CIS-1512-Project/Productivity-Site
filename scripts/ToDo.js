@@ -8,23 +8,26 @@ document.getElementById("mainTask").onclick = function()
 */
 function createItem(x){
     let name = prompt("Please enter item:");
-    if (name != null || name != "") {
+    if (name == null || name == "") {
+        alert("No item entered");
+    } else
+    {
         const Item = document.createElement("p");
         const node = document.createTextNode(name);
         Item.appendChild(node);
         Item.classList.add("ToDoItem");
         (x.parentNode).insertBefore(Item, x);
-    } else
-    {
-        alert("No item entered");
-    }s
+    }
 }
 /** Creates a new List 
 * @param {object} x - The HTML element that will go after the new list.
 */
 function createList(x){
     let name = prompt("Please enter list name:");
-    if (name != null || name != "") {
+    if (name == null || name == "") {
+        alert("No name entered");
+    } else
+    {
         const section = document.createElement("section");
         section.classList.add("subList");
         (x.parentNode).insertBefore(section, x);
@@ -41,8 +44,5 @@ function createList(x){
         Item.classList.add("ToDoItem");
         Item.onclick = function() {createItem(Item)};
         section.appendChild(Item);
-    } else
-    {
-        alert("No name entered");
     }
 }

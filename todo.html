@@ -9,6 +9,16 @@
     
     <link rel="stylesheet" href="master.css">
     <style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        *{
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        }
         .ToDoHeader
         {
             height: 10%;
@@ -27,6 +37,7 @@
             height: 30%;
             width: 100%;
             text-align: center;
+            overflow: auto;
         }
     </style>
 </head>
@@ -43,7 +54,7 @@
     </nav>
     <!--CONTENT BEGIN-->
     <main style="color:#ffffff">
-        <section style="width:70%; height:100%; float: left;">
+        <section style="width:70%; height:100%; float: left; overflow: auto;">
             <h1 class="ToDoHeader">
                 Main
             </h1>
@@ -51,7 +62,7 @@
                 Add Task
             </p>
         </section>
-        <section style="width:30%; height:100%; float: left;">
+        <section style="width:30%; height:100%; float: auto; overflow: auto;">
             <h2  class="ToDoHeader" id="list">
                 Create List
             </h2 >

@@ -12,11 +12,23 @@ function createItem(x){
         alert("No item entered");
     } else
     {
-        const Item = document.createElement("p");
+        const section = document.createElement("section");
+        section.classList.add("itemSection");
+        (x.parentNode).insertBefore(section, x);
+
+        const item = document.createElement("p");
         const node = document.createTextNode(name);
-        Item.appendChild(node);
-        Item.classList.add("ToDoItem");
-        (x.parentNode).insertBefore(Item, x);
+        item.appendChild(node);
+        item.classList.add("item");
+        item.onclick = function() {editElement(item)};
+        section.appendChild(item);
+
+        const delItem = document.createElement("p");
+        const delNode = document.createTextNode("D");
+        delItem.appendChild(delNode);
+        delItem.classList.add("delete");
+        delItem.onclick = function() {deleteElement(section)};
+        section.appendChild(delItem);
     }
 }
 /** Creates a new List 
@@ -28,21 +40,51 @@ function createList(x){
         alert("No name entered");
     } else
     {
+        const subList = document.createElement("section");
+        subList.classList.add("subList");
+        (x.parentNode).insertBefore(subList, x);
+
         const section = document.createElement("section");
-        section.classList.add("subList");
-        (x.parentNode).insertBefore(section, x);
+        section.classList.add("headerSection");
+        subList.appendChild(section);
 
         const para = document.createElement("h2");
         const node = document.createTextNode(name);
         para.appendChild(node);
-        para.classList.add("ToDoHeader");
+        para.classList.add("header");
+        para.onclick = function() {editElement(para)};
         section.appendChild(para);
 
-        const Item = document.createElement("p");
+        const delItem = document.createElement("p");
+        const delNode = document.createTextNode("D");
+        delItem.appendChild(delNode);
+        delItem.classList.add("delete");
+        delItem.onclick = function() {deleteElement(subList)};
+        section.appendChild(delItem);
+
+        const item = document.createElement("p");
         const node1 = document.createTextNode("add Task");
-        Item.appendChild(node1);
-        Item.classList.add("ToDoItem");
-        Item.onclick = function() {createItem(Item)};
-        section.appendChild(Item);
+        item.appendChild(node1);
+        item.classList.add("itemSection");
+        item.onclick = function() {createItem(item)};
+        subList.appendChild(item);
+    }
+}
+/** deletes the passes element 
+* @param {object} x - The HTML element that will be deleted.
+*/
+function deleteElement(x){
+    x.remove();
+}
+/** Changes the elements inner html 
+* @param {object} x - The HTML element that will be edited.
+*/
+function editElement(x){
+    let name = prompt("Please enter new name:");
+    if (name == null || name == "") {
+        alert("No item entered");
+    } else
+    {
+        x.innerHTML = name;
     }
 }

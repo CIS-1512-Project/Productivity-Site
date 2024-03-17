@@ -16,6 +16,19 @@ function createItem(x){
         section.classList.add("itemSection");
         (x.parentNode).insertBefore(section, x);
 
+        const checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.name = "isCompleted";
+        checkbox.classList.add("checkBox");
+        checkbox.onclick = function() {
+            if (checkbox.checked) {
+                section.style.textDecorationLine = "line-through"
+            }else{
+                section.style.textDecorationLine = "None"
+            }
+        };
+        section.appendChild(checkbox);
+
         const item = document.createElement("p");
         const node = document.createTextNode(name);
         item.appendChild(node);

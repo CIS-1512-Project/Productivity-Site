@@ -1,30 +1,21 @@
-let seconds = 60;
-let count = seconds;
+document.getElementById("btn_startTimer").onclick = function() {startTimer(document.getElementById("timer"))};
 
-let btn_startTimer = document.getElementById("btn_startTimer");
-btn_startTimer.addEventListener(click, changeColor('red'));
-
-
-
-text = document.getElementById("timer");
-
-
-function startTimer() { setInterval(countdown, 1000); }
-
-function countdown()
-{
-    count--
-    time_text.innerHTML = count;
-    console.log(count)
-    if(count == 0)
-    {
-        alert("TIMES UP LOL");
+function startTimer(timer){
+    let sec = prompt("Please enter time:");
+    if (sec == null || sec == "") {
+        alert("No time entered");
+    } else{
+        if (!isNaN(sec))
+        {
+            var time = setInterval(function() {
+                timer.innerHTML='00:'+sec;
+                sec--;
+                if (sec < 0) {
+                    clearInterval(time);
+                }
+            }, 1000);
+        }else{
+            alert("Non number entered");
+        }
     }
-}
-
-function changeColor(newColor)
-{
-    the_text = document.getElementById("the_text");
-    the_text.innerHTML = "YAY I AM SO ELATED RN"
-    the_text.style.color = newColor;
 }

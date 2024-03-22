@@ -1,6 +1,69 @@
-h1
+#main
 {
-    color: #d0ff41;
+    width:70%; 
+    height:100%; 
+    float: left; 
+    overflow: auto;
 }
+#sub
+{
+    width:30%; 
+    height:100%; 
+    float: auto; 
+    overflow: auto;
+}
+.circle-container{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 40%;
+    height: 40%;
+    margin-left:20%;
+    margin-right: 20%;
+    background-color: #ddd;
+    border-radius: 50%;
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+}
+.semicircle{
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: right center;
 
-#the_text { color:aqua;}
+}
+.semicircle:nth-child(1){
+    background-color: #088b8b;
+    z-index: 2;
+}
+.semicircle:nth-child(2){
+    background-color: #088b8b;
+    transform: rotate(180deg);
+    z-index: 3;
+}
+.semicircle:nth-child(3){
+    background-color: #ddd;
+    z-index: 4;
+    display: none;
+}
+.outermost-circle{
+    width: 98%;
+    height: 98%;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 5;
+}
+#timer{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    color: black;
+    z-index: 6;
+}

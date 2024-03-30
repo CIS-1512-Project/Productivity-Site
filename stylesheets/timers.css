@@ -1,69 +1,72 @@
-#main
-{
-    width:70%; 
-    height:100%; 
-    float: left; 
-    overflow: auto;
-}
-#sub
-{
-    width:30%; 
-    height:100%; 
-    float: auto; 
-    overflow: auto;
-}
-.circle-container{
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    width: 40%;
-    height: 40%;
-    margin-left:20%;
-    margin-right: 20%;
-    background-color: #ddd;
-    border-radius: 50%;
-    position: absolute;
-    overflow: hidden;
-    z-index: 1;
-}
-.semicircle{
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform-origin: right center;
-
-}
-.semicircle:nth-child(1){
-    background-color: #088b8b;
-    z-index: 2;
-}
-.semicircle:nth-child(2){
-    background-color: #088b8b;
-    transform: rotate(180deg);
-    z-index: 3;
-}
-.semicircle:nth-child(3){
-    background-color: #ddd;
-    z-index: 4;
-    display: none;
-}
-.outermost-circle{
-    width: 98%;
-    height: 98%;
-    background-color: white;
-    border-radius: 50%;
-    position: absolute;
-    z-index: 5;
-}
-#timer{
+* {
+    padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  .container {
+    background-color: #1b1b1b;
+    width: min(90%, 500px);
     position: absolute;
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+    padding: 4em 2em;
+    border-radius: 0.5em;
+  }
+  button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .section-container {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+  }
+  .btn {
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    background-color: #3e3f43;
+    color: #a9a7a7;
+  }
+  .btn-focus {
+    background-color: #cb202d;
+    color: #ffffff;
+  }
+  .time-btn-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+  }
+  #time {
     text-align: center;
-    transform: translate(-50%, -50%);
-    color: black;
-    z-index: 6;
-}
+    color: #ffffff;
+    font-size: 5em;
+    font-weight: 600;
+  }
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+  }
+  #btn-start,
+  #btn-pause {
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    background-color: #ffffff;
+  }
+  #btn-reset {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 2em;
+  }
+  .hide {
+    display: none;
+  }
+  .show {
+    display: block;
+  }

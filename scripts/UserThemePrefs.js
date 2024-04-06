@@ -25,7 +25,7 @@
  * * It is important to note that a single UTP instance can handle properties on multiple pages.
  *  You can use all of the pref arrays if you wanted to. Try not to go overboard, it'll be okay
  * 
- * Now, pushing user preferences is as easy as calling {@link PushRuleset}(UTP, ... ) with all of the rules we wish to push. `Rule` in this context refers to a CSS rule:
+ * Now, pushing user preferences is as easy as calling {@link PushRuleset}(...ruleset) with all of the rules we wish to push. `Rule` in this context refers to a CSS rule:
  * ```CSS
  *    property: value;
  * ```
@@ -41,9 +41,9 @@
  * ```
  * After doing this, UTP will override all properties which are a member of itself with the provided values. 
  * 
- * To load the data of UTP instance members (for updating), call {@link LoadData}(UTP). This is done automatically when you call {@link PushRuleset}(UTP, ...rules).
+ * To load the data of UTP instance members (for updating), call {@link LoadData}(). This is done automatically when you call {@link PushRuleset}(...ruleset).
  * 
- * To delete all user preferences stored by a UTP instance, call {@link DeleteData}(UTP).
+ * To delete all user preferences stored by a UTP instance, call {@link DeleteData}().
  * 
  * I don't know if it works because I havent tried, but you should be able to add
  * new pages to this system relatively easily by doing the following:
@@ -84,6 +84,7 @@ class UserThemePrefs {
         this.id = `user-theme-prefs-${id}`;
 
         UserThemePrefs.MakeGlobal(this);
+        // Attempt to load data for this UTP
         this.LoadData();
     }
 
@@ -197,12 +198,13 @@ class UserThemePrefs {
      * @returns {Boolean} True if any data was loaded from `localStorage`.
      */
     LoadData() {
+        // If we're not on a page which this UTP can have data for, don't try to load it.
+        if((this.prefs[0]??0 + this.prefs[UserThemePrefs.#page_index]??0) === 0) return false;
+        // Delete the old userprefs style element if it exists.
+        const SE = UserThemePrefs.#DeleteFromDocumentHead(this.id);
         const ruleset = this.QueryRuleset();
         // if there is no data for this object, don't make a style
-        if(ruleset.length == 0) return false;
-
-        // Delete the old userprefs style element if it exists.
-        UserThemePrefs.#DeleteFromDocumentHead(this.id);
+        if(ruleset.length == 0) return SE; // If there was a style but now there is no data, deleting the style was a successful load.
 
         // Create a new style element
         const UTPS = document.createElement("style");
@@ -228,10 +230,12 @@ class UserThemePrefs {
      * @returns {Boolean} True if any data was cleared from `localStorage`.
      */
     DeleteData() {
-        // if the style element doesnt exist, we can be sure (from the end-user POV) that this UTP doesn't have any data in storage.
-        if(!UserThemePrefs.#DeleteFromDocumentHead(this.id)) return false; 
+        const SE = UserThemePrefs.#DeleteFromDocumentHead(this.id);
+        const ruleset = this.QueryRuleset();
+        // if there is no data for this object, don't make a style
+        if(ruleset.length == 0) return SE; // If there was a style but now there is no data, deleting the style was a successful delete.
 
-        for(const rule of this.QueryRuleset()) {
+        for(const rule of ruleset) {
             localStorage.removeItem(rule.property);
         }
         return true;
@@ -264,24 +268,26 @@ class UserThemePrefs {
     }
 
     /** Tries to push a ruleset into all Global UTP instances.
-     * @param  {...Array} ruleset - Array of [property, value] elements.
+     * 
+     * Uhh don't call this function without the spread `...` operator. If you manage to pass a reference,
+     * all rules that are pushed will be removed from that array. This is intentional to make this function faster.
+     * @param  {Array} ruleset - Array of [property, value] elements.
      * @returns {Boolean} True if at least one rule was set.
      */
-    static PushRulesetToGlobals(...ruleset) {
+    static GlobalPushRuleset(...ruleset) {
         let ret = false;
         for(const UTP of this.#GlobalUTPs) {
             if(!UTP.PushRuleset(...ruleset)) continue;
 
             ret = true;
-            
             for(let rule_index = 0; rule_index < ruleset.length; rule_index++) {
                 if(!UTP.hasProperty(ruleset[rule_index][0])) continue;
 
+                
                 ruleset.splice(rule_index, 1);
                 rule_index--;
             }
-
-            if(ruleset.length == 0) break;
+            if(ruleset.length == 0) return true;
         } 
         return ret;
     }
@@ -293,11 +299,10 @@ class UserThemePrefs {
      * Call this if you want to preload all entries, or update all of them for whatever reason.
      * 
      * - If you use this for importing, make SURE you call it right after you make changes to `localStorage`. 
-     *    Unexpected interactions may occur if you ignore this. 
-     * > - For example, Calling {@link DeleteData}(UTP) on an unloaded UTP instance will do nothing.
+     *    Unexpected interactions may occur if you ignore this.
      * @returns {Boolean} True if any data was loaded from `localStorage`.
      */
-    static LoadGlobalData() { 
+    static GlobalLoadData() { 
         let ret = false;
         for(const UTP of this.#GlobalUTPs) if(UTP.LoadData()) ret = true; 
         return ret;
@@ -310,7 +315,7 @@ class UserThemePrefs {
      * `Clear global preferences` is a good descriptor of this action.
      * @returns {Boolean} True if any data was cleared from `localStorage`.
      */
-    static DeleteGlobalData() {
+    static GlobalDeleteData() {
         let ret = false;
         for(const UTP of this.#GlobalUTPs) if(UTP.DeleteData()) ret = true; 
         return ret;
@@ -318,10 +323,7 @@ class UserThemePrefs {
 }
 
 
- /* Preference Variable Group Declarations */
-
-// Any UTP with more than one prefs array (or an 'all' array) should be declared here.
-// If you only need the UTP for a specific page, you should embed the declaration in that page file.
+ /* Preference Variable Group Declarations || PLEASE declare all UTP instances here. */
 
 
 /** Variable group instance for the webpage */
@@ -350,5 +352,10 @@ const NAV_PREFS = new UserThemePrefs("nav", {
     ]
 });
 
+const TEST_PREFS = new UserThemePrefs("test", {
+    dashboard: [
+        "big-bois-in-atlanta"
+    ]
+});
 
 

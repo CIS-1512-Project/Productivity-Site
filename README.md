@@ -22,10 +22,10 @@ We have created a custom handler object to manage user theme preferences.
 The reason for needing a custom class is primarily for ease of use and speed benefits.
 
 The way it works is via the CSS `:root` element selector.
-We define variables in the root element on higher cascading levels, which are overridden by user preferences if they exist. Note that you don't have to define CSS variables first if you don't want to because putting a variable name into a UPO gives it the ability to create a variable with that name.
+We define variables in the root element on higher cascading levels, which are overridden by user preferences if they exist. Note that you don't have to define CSS variables first if you don't want to because putting a variable name into a UTP instance gives it the ability to create a variable with that name.
 Directly overriding CSS variables allows fine-tuned control over the styling of the web page.
 
-When developing the handler we wanted to focus on being able to easily manage and create groups of player preferences, even if you want to group properties which will affect different pages.
+When developing the handler we wanted to focus on being able to easily manage and create groups of user style preferences, even if you want to group properties which will affect different pages.
 
 Additionally, speed was intended to be optimized behind the current design.
 This is because our handler groups preferences together which are likely to be modified at the same time, reducing the amount of `setItem` and `getItem` calls per applied modification.
@@ -68,7 +68,7 @@ CHRIS YOU CAN WRITE HERE IF YOU WANT
 ### Azavier (Certified Webmaster)
 I'm Azavier! In the past I have enjoyed making my own web projects using various JavaScript libraries such as p5.js
 
-I am certified in several programming languages as well as the web development trifecta. Having successfully completed the CIW course, I _happily_ call myself a webmaster.
+I am certified in several programming languages, including the web development trifecta. Having successfully completed the CIW course, I _happily_ call myself a webmaster.
 >_The Big Apple is small when you're far away._ - Just made this up
 
 ### Sarah

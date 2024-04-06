@@ -6,11 +6,15 @@ let startBtn = document.getElementById("btn-start");
 let reset = document.getElementById("btn-reset");
 let pause = document.getElementById("btn-pause");
 let time = document.getElementById("time");
+let timeBtn = document.getElementById("btn-time");
 let set;
 let active = "focus";
 let count = 59;
 let paused = true;
 let minCount = 24;
+let focusMin = 24;
+let shortMin = 4;
+let longMin = 14;
 time.textContent = `${minCount + 1}:00`;
 
 const appendZero = (value) => {
@@ -19,23 +23,27 @@ const appendZero = (value) => {
 };
 
 reset.addEventListener(
-  "click",
-  (resetTime = () => {
-    pauseTimer();
-    switch (active) {
-      case "long":
-        minCount = 14;
-        break;
-      case "short":
-        minCount = 4;
-        break;
-      default:
-        minCount = 24;
-        break;
-    }
-    count = 59;
-    time.textContent = `${minCount + 1}:00`;
-  })
+    "click",
+    (resetTime = () => {
+        pauseTimer();
+        switch (active) {
+            case "long":
+                minCount = longMin;
+                break;
+            case "short":
+                minCount = shortMin;
+                break;
+            case "focus":
+                minCount = focusMin;
+                break;
+            default:
+                minCount = 24;
+                break;
+        }
+        timeBtn.classList.remove("hide");
+        count = 59;
+        time.textContent = `${minCount + 1}:00`;
+    })
 );
 
 const removeFocus = () => {
@@ -45,64 +53,93 @@ const removeFocus = () => {
 };
 
 focusButton.addEventListener("click", () => {
-  removeFocus();
-  focusButton.classList.add("btn-focus");
-  pauseTimer();
-  minCount = 24;
-  count = 59;
-  time.textContent = `${minCount + 1}:00`;
+    active = "focus"; 
+    removeFocus();
+    focusButton.classList.add("btn-focus");
+    pauseTimer();
+    minCount = 24;
+    count = 59;
+    time.textContent = `${minCount + 1}:00`;
 });
 
 shortBreakButton.addEventListener("click", () => {
-  active = "short";
-  removeFocus();
-  shortBreakButton.classList.add("btn-focus");
-  pauseTimer();
-  minCount = 4;
-  count = 59;
-  time.textContent = `${appendZero(minCount + 1)}:00`;
+    active = "short";
+    removeFocus();
+    shortBreakButton.classList.add("btn-focus");
+    pauseTimer();
+    minCount = 4;
+    count = 59;
+    time.textContent = `${appendZero(minCount + 1)}:00`;
 });
 
 longBreakButton.addEventListener("click", () => {
-  active = "long";
-  removeFocus();
-  longBreakButton.classList.add("btn-focus");
-  pauseTimer();
-  minCount = 14;
-  count = 59;
-  time.textContent = `${minCount + 1}:00`;
+    active = "long";
+    removeFocus();
+    longBreakButton.classList.add("btn-focus");
+    pauseTimer();
+    minCount = 14;
+    count = 59;
+    time.textContent = `${minCount + 1}:00`;
 });
 
 pause.addEventListener(
-  "click",
-  (pauseTimer = () => {
-    paused = true;
-    clearInterval(set);
-    startBtn.classList.remove("hide");
-    pause.classList.remove("show");
-    reset.classList.remove("show");
-  })
+    "click",
+    (pauseTimer = () => {
+        paused = true;
+        clearInterval(set);
+        startBtn.classList.remove("hide");
+        pause.classList.remove("show");
+        reset.classList.remove("show");
+    })
 );
 
 startBtn.addEventListener("click", () => {
-  reset.classList.add("show");
-  pause.classList.add("show");
-  startBtn.classList.add("hide");
-  startBtn.classList.remove("show");
-  if (paused) {
-    paused = false;
-    time.textContent = `${appendZero(minCount)}:${appendZero(count)}`;
-    set = setInterval(() => {
-      count--;
-      time.textContent = `${appendZero(minCount)}:${appendZero(count)}`;
-      if (count == 0) {
-        if (minCount != 0) {
-          minCount--;
-          count = 60;
-        } else {
-          clearInterval(set);
+    reset.classList.add("show");
+    pause.classList.add("show");
+    startBtn.classList.add("hide");
+    startBtn.classList.remove("show");
+    timeBtn.classList.add("hide");
+    timeBtn.classList.remove("show");
+    if (paused) {
+        paused = false;
+        time.textContent = `${appendZero(minCount)}:${appendZero(count)}`;
+        set = setInterval(() => {
+        count--;
+        time.textContent = `${appendZero(minCount)}:${appendZero(count)}`;
+        if (count == 0) {
+            if (minCount != 0) {
+            minCount--;
+            count = 60;
+            } else {
+            clearInterval(set);
+            }
         }
-      }
-    }, 1000);
-  }
+        }, 1000);
+    }
+});
+
+timeBtn.addEventListener("click", () => {
+    min = prompt("Enter amount of minutes between 1-60");
+    if (1 <= min && min <= 60 && !isNaN(min)){
+        min = Math.floor(min)-1;
+        switch (active) {
+            case "long":
+                longMin = min;
+                minCount = longMin;
+                break;
+            case "short":
+                shortMin = min;
+                minCount = shortMin;
+                break;
+            case "focus":
+                focusMin = min;
+                minCount = focusMin;
+                break;
+            default:
+                break;
+        }
+        time.textContent = `${minCount + 1}:00`;
+    }else{
+        alert("Invalid value entered");
+    }
 });

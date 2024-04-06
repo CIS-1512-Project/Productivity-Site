@@ -50,6 +50,7 @@
     justify-content: center;
     gap: 2em;
   }
+  #btn-time,
   #btn-start,
   #btn-pause {
     padding: 1em 2em;

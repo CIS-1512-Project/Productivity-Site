@@ -21,7 +21,7 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
         const hdrs = new Headers();
-        hdrs.set("Cross-Origin-Opener-Policy", "same-origin");
+        hdrs.set("Cross-Origin-Opener-Policy", "unsafe-none");
         
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();

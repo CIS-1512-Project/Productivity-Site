@@ -20,6 +20,9 @@
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
+        const hdrs = new Headers();
+        hdrs.set("Cross-Origin-Opener-Policy", "same-origin");
+        
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.

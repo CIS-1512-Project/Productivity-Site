@@ -1,0 +1,6 @@
+title: Productivity App
+description: App for student productivity
+
+devServer:
+  headers:
+    Cross-Origin-Opener-Policy: "same-origin-allow-popups"

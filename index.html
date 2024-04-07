@@ -18,18 +18,14 @@
         } 
     </style>
 
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/api.js"></script>
     <script>
-        const hdrs = new Headers();
-        hdrs.set("Cross-Origin-Opener-Policy", "unsafe-none");
-        
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        }
+        /*
+        gapi.client.init({
+            apiKey: '',
+            discoveryDocs: [''],
+            clientId: '752532080681-7q5iov20q2bshv91tak8bno5m97bo25e.apps.googleusercontent.com'
+        });*/
     </script>
 </head>
 
@@ -45,8 +41,59 @@
     </nav>
     <!--CONTENT BEGIN-->
     <main>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        
     </main>
     <!--CONTENT END-->
+
+    <!--Firebase -->
+    <script type="module">
+        const firebaseConfig = {
+            apiKey: "AIzaSyAgXZWfV_EPw84voff2pJ1pR7pVH9yMThg",
+            authDomain: "cis-1512-productivity-app.firebaseapp.com",
+            projectId: "cis-1512-productivity-app",
+            storageBucket: "cis-1512-productivity-app.appspot.com",
+            messagingSenderId: "752532080681",
+            appId: "1:752532080681:web:20db8f313491ec7b71b438",
+            measurementId: "G-7QTMD97WXB"
+        };
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        const app = initializeApp(firebaseConfig);
+
+        import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-functions.js";
+        const functions = getFunctions();
+        </script>
+      <script type="module">
+        import { GoogleAuthProvider, getAuth, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+
+        const provider = new GoogleAuthProvider();
+        provider.addScope('https://www.googleapis.com/auth/calendar.events');
+
+        const auth = getAuth();
+
+        const SIGNIN = () => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+                    // The signed-in user info.
+                    const user = result.user;
+                    // IdP data available using getAdditionalUserInfo(result)
+                    // ...
+                    console.log(token, user);
+                }).catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // The email of the user's account used.
+                    const email = error.customData.email;
+                    // The AuthCredential type that was used.
+                    const credential = GoogleAuthProvider.credentialFromError(error);
+                    // ...
+                });
+        }
+        SIGNIN();
+      </script>
 </body>
 </html>

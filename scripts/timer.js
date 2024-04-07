@@ -69,7 +69,7 @@ shortBreakButton.addEventListener("click", () => {
     pauseTimer();
     minCount = 4;
     count = 59;
-    time.textContent = `${appendZero(minCount + 1)}:00`;
+    time.textContent = `${(minCount + 1)}:00`;
 });
 
 longBreakButton.addEventListener("click", () => {
@@ -93,6 +93,11 @@ pause.addEventListener(
     })
 );
 
+function playSound () {
+	let ding = new Audio('sounds/ding.mp3');
+	ding.play();
+}
+
 startBtn.addEventListener("click", () => {
     reset.classList.add("show");
     pause.classList.add("show");
@@ -104,16 +109,18 @@ startBtn.addEventListener("click", () => {
         paused = false;
         time.textContent = `${appendZero(minCount)}:${appendZero(count)}`;
         set = setInterval(() => {
-        count--;
-        time.textContent = `${appendZero(minCount)}:${appendZero(count)}`;
-        if (count == 0) {
-            if (minCount != 0) {
-            minCount--;
-            count = 60;
-            } else {
-            clearInterval(set);
+            count--;
+            time.textContent = `${appendZero(minCount)}:${appendZero(count)}`;
+            if (count == 0) {
+                if (minCount != 0) {
+                    minCount--;
+                    count = 60;
+                } else {
+                    playSound();
+                    resetTime();
+                    clearInterval(set);
+                }
             }
-        }
         }, 1000);
     }
 });

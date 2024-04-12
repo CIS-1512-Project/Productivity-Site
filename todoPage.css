@@ -24,8 +24,13 @@ scrollbar-width: none;  /* Firefox */
     }
 .itemSection
 {
+    background-color: #1b4382;
+    border-radius: 40px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    width: 80%;
     height: 10%;
-    width: 100%;
     text-align: center;
     text-decoration-line: none;
     text-decoration-thickness: 0.2rem;
@@ -64,14 +69,20 @@ scrollbar-width: none;  /* Firefox */
 }
 #main
 {
-    width:70%; 
+    background-color: #192d4d;
+    border-radius: 40px;
+    margin-left: 10%;
+    margin-right: 10%;
+    width:50%; 
     height:100%; 
     float: left; 
     overflow: auto;
 }
 #sub
 {
-    width:30%; 
+    background-color: #192d4d;
+    border-radius: 40px;
+    width: 30%; 
     height:100%; 
     float: auto; 
     overflow: auto;

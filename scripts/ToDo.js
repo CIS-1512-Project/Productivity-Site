@@ -37,7 +37,7 @@ function createItem(x){
         section.appendChild(item);
 
         const delItem = document.createElement("p");
-        const delNode = document.createTextNode("D");
+        const delNode = document.createTextNode("X");
         delItem.appendChild(delNode);
         delItem.classList.add("delete");
         delItem.onclick = function() {deleteElement(section)};
@@ -69,7 +69,7 @@ function createList(x){
         section.appendChild(para);
 
         const delItem = document.createElement("p");
-        const delNode = document.createTextNode("D");
+        const delNode = document.createTextNode("X");
         delItem.appendChild(delNode);
         delItem.classList.add("delete");
         delItem.onclick = function() {deleteElement(subList)};

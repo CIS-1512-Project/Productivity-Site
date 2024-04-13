@@ -1,0 +1,55 @@
+<script src="scripts/UserThemePrefs.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="page_index" content="2">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Timer</title>
+        <!-- Font Awesome Icons -->
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <!-- Google Fonts -->
+        <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet"
+        />
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="stylesheets/all.css">
+        <link rel = "stylesheet" href = "stylesheets/timers.css">
+    </head>
+    <body>
+        <nav>
+            <div>
+                <a id="appname-element" href="/">NAME</a>
+                <a href="timers.html">TIMERS</a>
+                <a class="thisPage">TO-DO</a>
+                <a href="calendar.html">CALENDAR</a>
+            </div>
+        </nav>
+        <div class="container">
+        <div class="section-container">
+            <button id="focus" class="btn btn-timer btn-focus">Focus</button>
+            <button id="shortbreak" class="btn btn-shortbreak">Short Break</button>
+            <button id="longbreak" class="btn btn-longbreak">Long Break</button>
+        </div>
+        <div class="time-btn-container">
+            <p id="time"></p>
+            <div class="btn-container">
+                <button id="btn-time" class="btn show">Time</button>
+                <button id="btn-start" class="btn show">Start</button>
+                <button id="btn-pause" class="btn hide">Pause</button>
+                <button id="btn-reset" class="btn hide">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Script -->
+        <script src="scripts/UserThemePrefs.js"></script>
+        <script src="scripts/timer.js"></script>
+    </body>
+</html>

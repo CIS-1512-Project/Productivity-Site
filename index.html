@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="page_index" content="1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="allow-popups">
+
+    <title>Dashboard</title>
+    
+    <link rel="stylesheet" href="stylesheets/all.css">
+    <style>
+        /* Overriding the color of the bubble in this manner is exactly what our handler does. */
+        /* This is how you would define a default variable value for a specific page */
+        /* On the other hand, default variables for ALL pages go in the master.css :root element */
+        :root {
+            --name-bubble-col: #d0ff41ff;
+        } 
+    </style>
+</head>
+
+<script src="scripts/UserThemePrefs.js"></script>
+<body>
+    <nav>
+        <div>
+            <a id="appname-element" class="thisPage">NAME</a>
+            <a href="timers.html">TIMERS</a>
+            <a href="todo.html">TO-DO</a>
+            <a href="calendar.html">CALENDAR</a>
+        </div>
+    </nav>
+    <!--CONTENT BEGIN-->
+    <main>
+        <section class="halfPage">
+
+        </section>
+        <section class="halfPage">
+            <div id="timer-MainPage-Container">
+                <div class="section-container">
+                    <button id="focus" class="btn btn-timer btn-focus">Focus</button>
+                    <button id="shortbreak" class="btn btn-shortbreak">Short Break</button>
+                    <button id="longbreak" class="btn btn-longbreak">Long Break</button>
+                </div>
+                <div class="time-btn-container">
+                    <p id="time"></p>
+                    <div class="btn-container">
+                        <button id="btn-time" class="btn show">Time</button>
+                        <button id="btn-start" class="btn show">Start</button>
+                        <button id="btn-pause" class="btn hide">Pause</button>
+                        <button id="btn-reset" class="btn hide">Reset</button>
+                    </div>
+                </div>
+            </div>
+            <section id="todo-MainPage">
+                <h1 class="headerSection">
+                    Main
+                </h1>
+                <p class="itemSection" id="mainTask">
+                    Add Task
+                </p>
+            </section>
+        </section>
+
+
+
+    </main>
+    <!--CONTENT END-->
+    <script src="scripts/ToDo.js"></script>
+    <script src="scripts/timer.js"></script>
+    <!--Firebase -->
+    <script type="module">
+        const firebaseConfig = {
+            apiKey: "AIzaSyAgXZWfV_EPw84voff2pJ1pR7pVH9yMThg",
+            authDomain: "cis-1512-productivity-app.firebaseapp.com",
+            projectId: "cis-1512-productivity-app",
+            storageBucket: "cis-1512-productivity-app.appspot.com",
+            messagingSenderId: "752532080681",
+            appId: "1:752532080681:web:20db8f313491ec7b71b438",
+            measurementId: "G-7QTMD97WXB"
+        };
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        const app = initializeApp(firebaseConfig);
+
+        import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-functions.js";
+        const functions = getFunctions();
+        </script>
+      <script type="module">
+        import { GoogleAuthProvider, getAuth, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+
+        const provider = new GoogleAuthProvider();
+        provider.addScope('https://www.googleapis.com/auth/calendar.events');
+
+        const auth = getAuth();
+
+        const SIGNIN = () => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+                    // The signed-in user info.
+                    const user = result.user;
+                    // IdP data available using getAdditionalUserInfo(result)
+                    // ...
+                    console.log(token, user);
+                }).catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // The email of the user's account used.
+                    const email = error.customData.email;
+                    // The AuthCredential type that was used.
+                    const credential = GoogleAuthProvider.credentialFromError(error);
+                    // ...
+                });
+        }
+        SIGNIN();
+      </script>
+</body>
+</html>

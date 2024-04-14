@@ -31,9 +31,42 @@
     </nav>
     <!--CONTENT BEGIN-->
     <main>
-        
+        <section class="halfPage">
+
+        </section>
+        <section class="halfPage">
+            <div id="timer-MainPage-Container">
+                <div class="section-container">
+                    <button id="focus" class="btn btn-timer btn-focus">Focus</button>
+                    <button id="shortbreak" class="btn btn-shortbreak">Short Break</button>
+                    <button id="longbreak" class="btn btn-longbreak">Long Break</button>
+                </div>
+                <div class="time-btn-container">
+                    <p id="time"></p>
+                    <div class="btn-container">
+                        <button id="btn-time" class="btn show">Time</button>
+                        <button id="btn-start" class="btn show">Start</button>
+                        <button id="btn-pause" class="btn hide">Pause</button>
+                        <button id="btn-reset" class="btn hide">Reset</button>
+                    </div>
+                </div>
+            </div>
+            <section id="todo-MainPage">
+                <h1 class="headerSection">
+                    Main
+                </h1>
+                <p class="itemSection" id="mainTask">
+                    Add Task
+                </p>
+            </section>
+        </section>
+
+
+
     </main>
     <!--CONTENT END-->
+    <script src="scripts/ToDo.js"></script>
+    <script src="scripts/timer.js"></script>
 
     <!--Firebase -->
     <script type="module">
